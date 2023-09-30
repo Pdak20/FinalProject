@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %}
+    Upload files
+{% endblock %}
+
+{% block main %}
+
+<html>
+  <head>
+    <title>Chat Box UI Design</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Import this CDN to use icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <!-- Main container -->
+    <div class="container">
+      <!-- msg-header section starts -->
+      <div class="msg-header">
+        <div class="container1">
+          <div class="active">
+            <p>Inquire about the file</p>
+          </div>
+        </div>
+      </div>
+      <!-- msg-header section ends -->
+
+      <!-- Chat inbox  -->
+      <div class="chat-page">
+        <div class="msg-inbox">
+          <div class="chats">
+            <!-- Message container -->
+            <div class="msg-page">
+              <!-- Incoming messages -->
+              {% for paragraph in paragraphs %}
+                {% if paragraph["type"] == "answer" %}
+                  <div class="received-chats">
+                    <div class="received-msg">
+                      <div class="received-msg-inbox">
+                        <p>
+                          {{paragraph["paragraph"]}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                {% else %}
+                  <!-- Outgoing messages -->
+                  <div class="outgoing-chats">
+                    <div class="outgoing-msg">
+                      <div class="outgoing-chats-msg">
+                        <p class="multi-msg">
+                          {{paragraph["paragraph"]}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+          <!-- msg-bottom section -->
+
+          <form class="msg-bottom" action="/chat" method="post">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Write question"
+                name="question"
+              />
+
+              <button class="btn btn-primary" type="submit">prompt</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+{% endblock %}
